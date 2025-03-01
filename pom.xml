@@ -71,6 +71,16 @@
             <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+		    <groupId>org.pitest</groupId>
+		    <artifactId>pitest</artifactId>
+		    <version>1.18.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.pitest</groupId>
+		    <artifactId>pitest-junit5-plugin</artifactId>
+		    <version>1.2.2</version>
+		</dependency>
     </dependencies>
 
     <distributionManagement>
@@ -150,6 +160,63 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.10.0</version>
             </plugin>
+            
+            <plugin>
+	            <groupId>org.jacoco</groupId>
+	            <artifactId>jacoco-maven-plugin</artifactId>
+	            <version>0.8.7</version>
+	            <executions>
+	                <execution>
+	                    <id>prepare-agent</id>
+	                    <goals>
+	                        <goal>prepare-agent</goal>
+	                    </goals>
+	                </execution>
+	                <execution>
+	                    <id>report</id>
+	                    <phase>verify</phase>
+	                    <goals>
+	                        <goal>report</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	    	</plugin>
+
+			<plugin>
+			    <groupId>org.pitest</groupId>
+			    <artifactId>pitest-maven</artifactId>
+			    <version>1.18.2</version>
+			    
+			    <executions>
+					<execution>
+						<id>pit-report</id>
+						<!-- optional, this example attached the goal into mvn test phase -->
+						<phase>test</phase>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+					</execution>
+				</executions>
+			    
+			    <dependencies>
+			        <dependency>
+			            <groupId>org.pitest</groupId>
+			            <artifactId>pitest-junit5-plugin</artifactId>
+			            <version>1.2.2</version>
+			        </dependency>
+			    </dependencies>
+			    <configuration>
+			        <!-- no longer required -->
+			        <targetClasses>
+			            <param>org.jfree.chart.api.*</param>
+			        </targetClasses>
+			        <!-- no longer required -->
+			        <targetTests>
+			            <param>org.jfree.chart.api.*</param>
+			        </targetTests>
+			    </configuration>
+			</plugin>
+	    
         </plugins>
     </build>
 
