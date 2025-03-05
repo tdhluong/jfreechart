@@ -208,14 +208,32 @@
 			    <configuration>
 			        <!-- no longer required -->
 			        <targetClasses>
-			            <param>org.jfree.chart.api.*</param>
+			            <param>org.jfree.chart.block.*</param>
 			        </targetClasses>
 			        <!-- no longer required -->
 			        <targetTests>
-			            <param>org.jfree.chart.api.*</param>
+			            <param>org.jfree.chart.block.*</param>
 			        </targetTests>
 			    </configuration>
 			</plugin>
+			
+<plugin>
+    <groupId>com.github.spotbugs</groupId>
+    <artifactId>spotbugs-maven-plugin</artifactId>
+    <version>4.9.2.0</version>
+    <executions>
+        <execution>
+            <phase>verify</phase>
+            <goals>
+                <goal>check</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <failOnError>false</failOnError>
+    </configuration>
+</plugin>
+
 	    
         </plugins>
     </build>
